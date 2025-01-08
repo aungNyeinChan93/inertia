@@ -58,20 +58,32 @@
                     <Header> Register</Header>
                     <form @submit.prevent="formSubmit" class="mt-8 grid grid-cols-6 gap-6">
                         <div class="col-span-6">
-                            <TextInput name="Name" type="text" :error="form.errors.name" v-model="form.name"/>
+
+                            <img :src="preview ? preview: '/storage/avator/default.png' " class=" w-[200px] mx-auto rounded-xl p-2" alt="">
+                        </div>
+                        <div class="col-span-6">
+                            <label class="block text-sm font-medium text-gray-700" for="avator">Avator</label>
+                            <input
+                                class="p-3 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                                type="file" name="avator" id="avator" @input="change">
+                        </div>
+                        <div class="col-span-6">
+                            <TextInput name="Name" type="text" :error="form.errors.name" v-model="form.name" />
                         </div>
 
                         <div class="col-span-6">
-                            <TextInput name="Email" type="email" :error="form.errors.email" v-model="form.email"/>
+                            <TextInput name="Email" type="email" :error="form.errors.email" v-model="form.email" />
 
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <TextInput name="Password" type="password" :error="form.errors.password" v-model="form.password" />
+                            <TextInput name="Password" type="password" :error="form.errors.password"
+                                v-model="form.password" />
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <TextInput name="Password Confirmation" type="password" :error="form.errors.password_confirmation" v-model="form.password_confirmation" />
+                            <TextInput name="Password Confirmation" type="password"
+                                :error="form.errors.password_confirmation" v-model="form.password_confirmation" />
                         </div>
 
                         <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
@@ -95,13 +107,17 @@
 import { Link, router, useForm } from '@inertiajs/vue3';
 import TextInput from '../components/TextInput.vue';
 import Header from '../components/Header.vue';
+import { ref } from 'vue';
 
 const form = useForm({
     name: null,
     email: null,
     password: null,
-    password_confirmation: null ,
+    password_confirmation: null,
+    avator:null,
 });
+
+const preview = ref('');
 
 const formSubmit = () => {
     console.log(form);
@@ -110,6 +126,11 @@ const formSubmit = () => {
         onError: () => form.reset('password', "password_confirmation"),
 
     }, { preserveState: true });
+}
+
+const change =(e)=>{
+    form.avator= e.target.files[0];
+    preview.value = URL.createObjectURL(e.target.files[0]);
 }
 
 </script>
