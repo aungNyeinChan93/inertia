@@ -45,4 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function house(){
+        return $this->hasOne(House::class,'user_id','id');
+    }
 }

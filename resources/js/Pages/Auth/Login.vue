@@ -11,6 +11,7 @@
 
                         <input type="email" id="Email" name="email" v-model="form.email"
                             class="p-3 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                            <div class="text-sm text-red-600 p-3" v-show="$page.props.errors.email">{{ $page.props.errors.email }}</div>
                     </div>
 
                     <div class="col-span-6 ">
@@ -18,6 +19,7 @@
 
                         <input type="password" id="Password" name="password" v-model="form.password"
                             class="p-3 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                            <div class="text-sm text-red-600 p-3" v-show="$page.props.errors.password">{{ $page.props.errors.password }}</div>
                     </div>
 
                     <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
@@ -28,7 +30,7 @@
 
                         <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                             Already have not account?
-                            <a href="#" class="text-gray-700 underline">Register</a>.
+                            <Link :href="route('register')" class="text-gray-700 underline">Register</Link>.
                         </p>
                     </div>
                 </form>
@@ -40,6 +42,7 @@
 
 <script setup>
 import { router, useForm } from '@inertiajs/vue3';
+import {Link} from '@inertiajs/vue3';
 
 const form = useForm({
     email: '',

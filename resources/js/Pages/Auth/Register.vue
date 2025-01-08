@@ -55,50 +55,35 @@
                     </div>
 
                     <!-- form  -->
+                    <Header> Register</Header>
                     <form @submit.prevent="formSubmit" class="mt-8 grid grid-cols-6 gap-6">
                         <div class="col-span-6">
-                            <label for="FirstName" class="block text-sm font-medium text-gray-700">
-                                Name
-                            </label>
-
-                            <input type="text" id="name" name="name" v-model="form.name"
-                                class="p-3 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                            <TextInput name="Name" type="text" :error="form.errors.name" v-model="form.name"/>
                         </div>
 
                         <div class="col-span-6">
-                            <label for="Email" class="block text-sm font-medium text-gray-700"> Email </label>
+                            <TextInput name="Email" type="email" :error="form.errors.email" v-model="form.email"/>
 
-                            <input type="email" id="Email" name="email" v-model="form.email"
-                                class="p-3 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="Password" class="block text-sm font-medium text-gray-700"> Password </label>
-
-                            <input type="password" id="Password" name="password" v-model="form.password"
-                                class="p-3 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                            <TextInput name="Password" type="password" :error="form.errors.password" v-model="form.password" />
                         </div>
 
                         <div class="col-span-6 sm:col-span-3">
-                            <label for="PasswordConfirmation" class="block text-sm font-medium text-gray-700">
-                                Password Confirmation
-                            </label>
-
-                            <input type="password" id="PasswordConfirmation" name="password_confirmation" v-model="form.password_confirmation"
-                                class="p-3 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                            <TextInput name="Password Confirmation" type="password" :error="form.errors.password_confirmation" v-model="form.password_confirmation" />
                         </div>
 
                         <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                            <button
-                            type="submit"
+                            <button type="submit"
                                 class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500">
                                 Create an account
                             </button>
 
                             <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                                 Already have an account?
-                                <a href="#" class="text-gray-700 underline">Log in</a>.
                             </p>
+                            <Link :href="route('login')" class="text-gray-700 underline">Log in</Link>.
                         </div>
                     </form>
                 </div>
@@ -107,18 +92,24 @@
     </section>
 </template>
 <script setup>
-import { router, useForm } from '@inertiajs/vue3';
+import { Link, router, useForm } from '@inertiajs/vue3';
+import TextInput from '../components/TextInput.vue';
+import Header from '../components/Header.vue';
 
-const form =useForm({
-    name:'',
-    email:'',
-    password:'',
-    password_confirmation:'',
+const form = useForm({
+    name: null,
+    email: null,
+    password: null,
+    password_confirmation: null ,
 });
 
-const formSubmit = ()=>{
+const formSubmit = () => {
     console.log(form);
-    router.post('/register',form,{preserveState:true})
+    // router.post('/register',form,{preserveState:true})
+    form.post('/register', {
+        onError: () => form.reset('password', "password_confirmation"),
+
+    }, { preserveState: true });
 }
 
 </script>

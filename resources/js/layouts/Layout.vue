@@ -14,11 +14,15 @@
                 <nav aria-label="Global" class="hidden md:block">
                     <ul class="flex items-center gap-6 text-sm">
                         <li>
-                            <Link :class="{'text-red-600':$page.component == 'Home'}" class="text-gray-500 transition hover:text-gray-500/75" :href="route('home')"> Home </Link>
+                            <Link :class="{ 'text-red-600': $page.component == 'Home' }"
+                                class="text-gray-500 transition hover:text-gray-500/75" :href="route('home')"> Home
+                            </Link>
                         </li>
 
                         <li>
-                            <Link :class="{'text-red-600':$page.component == 'About'}" class="text-gray-500 transition hover:text-gray-500/75" :href="route('about')"> About </Link>
+                            <Link :class="{ 'text-red-600': $page.component == 'About' }"
+                                class="text-gray-500 transition hover:text-gray-500/75" :href="route('about')"> About
+                            </Link>
                         </li>
 
                         <li>
@@ -41,19 +45,23 @@
 
                 <div class="flex items-center gap-4">
                     <div class="sm:flex sm:gap-4">
-                        <Link class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                            :href="route('login')">
+                        <span class="flex gap-4" v-show="!$page.props.auth.user">
+                            <Link
+                                class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+                                :href="route('login')">
                             Login
-                        </Link>
+                            </Link>
 
-                        <Link class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-                            :href="route('register')">
+                            <Link
+                                class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
+                                :href="route('register')">
                             Register
-                        </Link>
+                            </Link>
+                        </span>
 
-                        <Link as="button" method="post" :href="route('logout')" class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-                            >
-                            Logout
+                        <Link v-show="$page.props.auth.user" as="button" method="post" :href="route('logout')"
+                            class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block">
+                        Logout
                         </Link>
                     </div>
 
@@ -70,7 +78,7 @@
         </div>
     </header>
     <main>
-        <slot/>
+        <slot />
     </main>
 </template>
 

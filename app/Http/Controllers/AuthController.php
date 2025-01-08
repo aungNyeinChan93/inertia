@@ -22,7 +22,9 @@ class AuthController extends Controller
             'password_confirmation' => 'required|string|min:8',
         ]);
 
-        User::create($fields);
+        $user = User::create($fields);
+
+        Auth::login($user);
 
         return to_route("home");
     }
@@ -42,7 +44,8 @@ class AuthController extends Controller
 
         if(!auth()->attempt($fields)){
             return back()->withErrors([
-                'name'=>'your credentials are something wrong!'
+                'email'=>'your credentials are something wrong!',
+                'password'=>'your credentials are something wrong!',
             ]);
         }
 

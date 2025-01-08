@@ -2,10 +2,10 @@
     <Head title="Home"/>
 
         <div>
-            <h1 class="text-red-600 text-2xl text-center p-3">Home | {{ defaultUser }}</h1>
+            <h1 class="text-red-600 text-2xl text-center p-3">Home | {{ user ? user.name: null }}</h1>
 
-            <p>{{ $page.props.auth.user }}</p>
-            
+            <!-- <p>{{ $page.props.auth.user }}</p> -->
+
             <div class="grid grid-cols-4 gap-4 mx-10">
                 <article v-for="user in users" :key="user.id"
                     class="flex items-end justify-between rounded-lg border border-gray-100 bg-white hover:bg-green-200 p-6">
@@ -42,8 +42,8 @@ const props = defineProps({
     }
 })
 
-const defaultUser = computed(()=>{
-    return page.props.default.user;
+const user = computed(()=>{
+    return page.props.auth.user;
 });
 
 
