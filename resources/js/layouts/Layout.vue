@@ -3,8 +3,9 @@
         <div class="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
             <a class="block text-teal-600" href="#">
                 <span class="sr-only">Home</span>
-                <!-- <img v-if="!$page.props.auth.user.avator" :src="`/storage/${$page.props.auth.user.avator}`" class="w-[30px] rounded-xl" alt=""> -->
-                <img :src="`/storage/avator/default.png`" class="w-[30px] rounded-xl" alt="">
+                <img v-if="$page.props.auth.user"
+                    :src="$page.props.auth.user.avator ? `storage/${$page.props.auth.user.avator}` : `storage/avator/default.png`"
+                    class="w-[30px] rounded-xl" alt="">
             </a>
 
             <div class="flex flex-1 items-center justify-end md:justify-between">

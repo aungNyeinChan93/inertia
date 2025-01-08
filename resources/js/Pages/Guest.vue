@@ -20,15 +20,15 @@
                 </p>
 
                 <div class="mt-8 flex flex-wrap gap-4 text-center">
-                    <a href="#"
+                    <Link :href="route('login')"
                         class="block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto">
-                        Get Started
-                    </a>
+                        Login
+                    </Link>
 
-                    <a href="#"
+                    <Link :href="route('register')"
                         class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-rose-600 shadow hover:text-rose-700 focus:outline-none focus:ring active:text-rose-500 sm:w-auto">
-                        Learn More
-                    </a>
+                        Register
+                    </Link>
                 </div>
             </div>
         </div>
@@ -36,6 +36,7 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3';
 
 </script>
 

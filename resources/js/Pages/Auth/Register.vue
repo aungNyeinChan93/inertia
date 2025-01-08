@@ -57,16 +57,19 @@
                     <!-- form  -->
                     <Header> Register</Header>
                     <form @submit.prevent="formSubmit" class="mt-8 grid grid-cols-6 gap-6">
-                        <div class="col-span-6">
 
+                        <div class="col-span-6">
                             <img :src="preview ? preview: '/storage/avator/default.png' " class=" w-[200px] mx-auto rounded-xl p-2" alt="">
                         </div>
+
                         <div class="col-span-6">
                             <label class="block text-sm font-medium text-gray-700" for="avator">Avator</label>
                             <input
                                 class="p-3 mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                 type="file" name="avator" id="avator" @input="change">
+                                <div class="text-red-600 text-sm p-3">{{ form.errors.avator }}</div>
                         </div>
+
                         <div class="col-span-6">
                             <TextInput name="Name" type="text" :error="form.errors.name" v-model="form.name" />
                         </div>
