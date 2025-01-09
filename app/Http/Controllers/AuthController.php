@@ -39,7 +39,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return to_route("home");
+        return to_route("home")->with('message','You have registration success!');
     }
 
     // login
@@ -67,7 +67,7 @@ class AuthController extends Controller
 
         auth()->login($user);
 
-        return to_route('home');
+        return to_route('home')->with('message','you have login success!');
     }
 
     // logout

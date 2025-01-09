@@ -42,8 +42,11 @@ class HandleInertiaRequests extends Middleware
             ],
             // lazay
             'auth.user' => function () use ($request) {
-                return $request->user() ? $request->user()->only('name', 'email', 'id','avator') : null;
+                return $request->user() ? $request->user()->only('name', 'email', 'id', 'avator') : null;
             },
+            'flash' => [
+                'message' => fn() => $request->session()->get('message')
+            ],
 
 
         ]);
